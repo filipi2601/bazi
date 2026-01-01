@@ -1,9 +1,8 @@
-import { Solar } from "lunar-javascript";
+import { Solar, Lunar } from "lunar-javascript";
 import { STEM_ELEMENT } from "./translations";
 
 export function calculateBaZi(date) {
-  const solar = Solar.fromDate(date);
-  const lunar = solar.getLunar();
+  const lunar = Lunar.fromDate(date);
 
   return {
     year: lunar.getYearInGanZhiExact(),
