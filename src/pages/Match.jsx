@@ -10,10 +10,10 @@ import {
   IconButton,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { fetchPlayers } from "../services/axios";
 import { calculateBaZi } from "../utils/bazi";
 import BaZiChart from "../components/BaziChart";
 import CalculatorDay from "../components/CalculatorDay";
+import axios from "axios";
 
 export default function Match() {
   const [team1Id, setTeam1Id] = useState("");
@@ -29,7 +29,7 @@ export default function Match() {
     if (!team1Id) return;
     setLoading1(true);
     try {
-      const data = await fetchPlayers(team1Id);
+      const { data } = await axios.get(`/api/players?teamId=${team1Id}`);
       const simplifiedPlayers = (data.players || []).map((player) => ({
         name: player.name,
         dateOfBirth: player.dateOfBirth,
@@ -46,7 +46,7 @@ export default function Match() {
     if (!team2Id) return;
     setLoading2(true);
     try {
-      const data = await fetchPlayers(team2Id);
+      const { data } = await axios.get(`/api/players?teamId=${team2Id}`);
       const simplifiedPlayers = (data.players || []).map((player) => ({
         name: player.name,
         dateOfBirth: player.dateOfBirth,
@@ -165,7 +165,7 @@ export default function Match() {
         ))}
       </Grid>
       {/* Mapa do confronto fixado */}
-      <Grid item xs={12} md={4} sx={{ position: "sticky", top: 16 }}>
+      <Grid item xs={12} md={4}>
         <CalculatorDay />
       </Grid>
       {/* Coluna do Time 2 */}
@@ -195,13 +195,13 @@ export default function Match() {
 
         {/* Lista de jogadores do Time 2 */}
         {charts2.map((chart) => (
-          <Grid item xs={12} md={6} lg={4} key={chart.id}>
+          <Grid item xs={12} md={6} lg={4} key={chart.id} m={1}>
             <Card sx={{ padding: 1 }}>
               <CardContent sx={{ position: "relative" }}>
                 <IconButton
                   size="small"
                   onClick={() =>
-                    setCharts1((prev) => prev.filter((c) => c.id !== chart.id))
+                    setCharts2((prev) => prev.filter((c) => c.id !== chart.id))
                   }
                   sx={{
                     position: "absolute",

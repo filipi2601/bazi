@@ -27,7 +27,6 @@ export default function CalculatorDay() {
     const [hour, minute] = time.split(":");
 
     const jsDate = new Date(year, month - 1, day, hour, minute);
-    console.log(date);
     const bazi = calculateBaZi(jsDate);
 
     setChart({
@@ -37,7 +36,6 @@ export default function CalculatorDay() {
       pillars: bazi,
     });
 
-    // limpa formulário
     setDate("");
     setTime("");
   }
@@ -93,7 +91,7 @@ export default function CalculatorDay() {
         </Card>
       </Container>
 
-      <Container maxWidth="lg" sx={{ mt: 4 }}>
+      <Container maxWidth="lg" sx={{ mt: 4, position: "sticky", top: 230 }}>
         <Grid container spacing={3} justifyContent={"center"} sx={{ mt: 2 }}>
           {chart && (
             <Card sx={{ padding: 1 }}>
