@@ -1,12 +1,15 @@
 import axios from "axios";
-
+const proxy = "https://cors-anywhere.herokuapp.com/";
 export const fetchPlayers = async (id) => {
   try {
-    const response = await axios.get(`/api/clubs/${id}/players`, {
-      headers: {
-        accept: "application/json",
-      },
-    });
+    const response = await axios.get(
+      proxy + `https://transfermarkt-api.fly.dev/clubs/${id}/players`,
+      {
+        headers: {
+          accept: "application/json",
+        },
+      }
+    );
 
     return response.data;
   } catch (error) {
@@ -16,11 +19,14 @@ export const fetchPlayers = async (id) => {
 
 export const fetchTeam = async (id) => {
   try {
-    const response = await axios.get(`/api/clubs/${id}/profile`, {
-      headers: {
-        accept: "application/json",
-      },
-    });
+    const response = await axios.get(
+      proxy + `https://transfermarkt-api.fly.dev/clubs/${id}/profile`,
+      {
+        headers: {
+          accept: "application/json",
+        },
+      }
+    );
 
     return response.data.officialName;
   } catch (error) {
