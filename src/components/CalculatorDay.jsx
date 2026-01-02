@@ -21,12 +21,17 @@ export default function CalculatorDay() {
   const [chart, setChart] = useState(null);
 
   function handleCalculate() {
-    if (!date || !time) return;
+    if (!date) return;
 
     const [year, month, day] = date.split("-");
     const [hour, minute] = time.split(":");
+    let jsDate;
+    if (time) {
+      jsDate = new Date(year, month - 1, day, hour, minute);
+    } else {
+      jsDate = new Date(year, month - 1, day);
+    }
 
-    const jsDate = new Date(year, month - 1, day, hour, minute);
     const bazi = calculateBaZi(jsDate);
 
     setChart({

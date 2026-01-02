@@ -61,6 +61,7 @@ export default function Match() {
 
   useEffect(() => {
     if (players1.length === 0) return;
+    console.log(players1);
     generateChartPlayers1();
   }, [players1]);
   useEffect(() => {
@@ -70,16 +71,20 @@ export default function Match() {
 
   const generateChartPlayers1 = () => {
     const charts = players1.map((player) => {
-      const [year, month, day] = player.dateOfBirth.split("-");
-      const jsDate = new Date(year, month - 1, day, 0, 0);
-      const pillars = calculateBaZi(jsDate);
-
-      return {
-        id: crypto.randomUUID(),
-        name: player.name,
-        date: player.dateOfBirth,
-        pillars,
-      };
+      if (player.dateOfBirth) {
+        const [year, month, day] = player.dateOfBirth.split("-");
+        const jsDate = new Date(year, month - 1, day, 0, 0);
+        const pillars = calculateBaZi(jsDate);
+        return {
+          id: crypto.randomUUID(),
+          name: player.name,
+          date: player.dateOfBirth,
+          pillars,
+        };
+      } else {
+        const pillars = {};
+        return "Jogador sem data de nascimento identificada.";
+      }
     });
 
     setCharts1(charts);
