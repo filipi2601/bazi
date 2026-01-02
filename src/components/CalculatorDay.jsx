@@ -13,7 +13,7 @@ import {
 import CloseIcon from "@mui/icons-material/Close";
 
 import { calculateBaZi } from "../utils/bazi";
-import BaZiChart from "../components/BaziChart";
+import BaZiChart from "./BaziChart";
 
 export default function CalculatorDay() {
   const [date, setDate] = useState("");
