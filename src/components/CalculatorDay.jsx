@@ -27,6 +27,7 @@ export default function CalculatorDay() {
     const [hour, minute] = time.split(":");
 
     const jsDate = new Date(year, month - 1, day, hour, minute);
+    console.log(date);
     const bazi = calculateBaZi(jsDate);
 
     setChart({
@@ -43,7 +44,7 @@ export default function CalculatorDay() {
 
   return (
     <>
-      <Container maxWidth="sm">
+      <Container maxWidth="sm" sx={{ position: "sticky", top: 16 }}>
         <Card
           sx={{
             mt: 4,
@@ -53,7 +54,7 @@ export default function CalculatorDay() {
         >
           <CardContent>
             <Typography variant="h5" gutterBottom>
-              Date
+              Date of the match
             </Typography>
 
             <Grid container spacing={2}>
